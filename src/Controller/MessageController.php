@@ -26,7 +26,7 @@ class MessageController extends AbstractController
     /**
      * @Route("/contact", name="contact")
      */
-    public function EnvoieMail(Request $request, GestionContact $gestionContact): Response{
+    public function contact(Request $request, GestionContact $gestionContact): Response{
         $message= new Message();
         
         $form=$this->createForm(MessageType::class,$message);
@@ -35,9 +35,8 @@ class MessageController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             $message = $form->getData();
             
-            $gestionContact->envoieMailContact($message);
+            $gestionContact->sendEmailWithAttachments($message);
             
-            return $this->redirectToRoute("home");
         }
         
         return $this->render('message/contact.html.twig',[
