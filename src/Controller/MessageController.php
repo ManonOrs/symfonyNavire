@@ -39,6 +39,7 @@ class MessageController extends AbstractController
             
         }
         
+        $this->addFlash('notification', "votre message a bien été envoyé");
         return $this->render('message/contact.html.twig',[
                     'form' => $form->createView(),
         ]);

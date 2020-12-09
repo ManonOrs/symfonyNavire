@@ -9,7 +9,11 @@
         <div id="navbar">
         {% include('elements/navbar.html.twig') %}
         </div>
-        
+        {% for message in app.flashes('notification') %}
+            <div class="alert alert-warning">
+                {{ message }}
+            </div>
+        {% endfor %}
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
         

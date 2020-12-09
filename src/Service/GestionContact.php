@@ -68,6 +68,7 @@ Mesage :
 <p>
     " . $message->getMessage() . "
 </p>",
+          'attachment' => array("Document" => "documents/presentation.pdf"),
         'CustomID' => "AppGettingStartedTest"
       ]
     ]
