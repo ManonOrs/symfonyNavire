@@ -37,6 +37,10 @@ class Navire
 
     /**
      * @ORM\Column(type="string", length=9)
+     * @Assert\Length(
+     *                  min=1,
+     *                  max=9
+     *                  )
      */
     private $mmsi;
 
