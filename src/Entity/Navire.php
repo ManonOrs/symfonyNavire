@@ -19,7 +19,7 @@ class Navire
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=7)
+     * @ORM\Column(type="string", length=7, unique=true)
      * @Assert\Regex(
      *      pattern="/[1-9]{7}/",
      *      message="Le numéro IMOdoit comporter 7 chiffres"
@@ -46,7 +46,7 @@ class Navire
     private $mmsi;
 
     /**
-     * @ORM\Column(type="string", length=10)
+     * @ORM\Column(type="string", length=10, name="indicatifappel", unique=true)
      */
     private $indicatifAppel;
 
@@ -54,6 +54,19 @@ class Navire
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $eta;
+
+    /**
+     * @ORM\Column(name="letype")
+     * @ORM\ManyToOne(targetEntity=AisShipType::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $leType;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Pays::class)
+     * @ORM\JoinColumn(nullable=false, name="idpays")
+     */
+    private $lePavillon;
 
     public function getId(): ?int
     {
@@ -116,6 +129,30 @@ class Navire
     public function setYes(string $yes): self
     {
         $this->eta = $yes;
+
+        return $this;
+    }
+
+    public function getLeType(): ?AisShipType
+    {
+        return $this->leType;
+    }
+
+    public function setLeType(?AisShipType $leType): self
+    {
+        $this->leType = $leType;
+
+        return $this;
+    }
+
+    public function getLePavillon(): ?Pays
+    {
+        return $this->lePavillon;
+    }
+
+    public function setLePavillon(?Pays $lePavillon): self
+    {
+        $this->lePavillon = $lePavillon;
 
         return $this;
     }
