@@ -45,9 +45,16 @@ class Port
      */
     private $lesTypes;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Navire::class, mappedBy="portDestination")
+     * @ORM\Column(name="idnaviresattendus")
+     */
+    private $naviresAttendus;
+
     public function __construct()
     {
         $this->lesTypes = new ArrayCollection();
+        $this->naviresAttendus = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -113,6 +120,36 @@ class Port
     {
         if ($this->lesTypes->removeElement($lesType)) {
             $lesType->removeLesPort($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Navire[]
+     */
+    public function getNaviresAttendus(): Collection
+    {
+        return $this->naviresAttendus;
+    }
+
+    public function addNaviresAttendu(Navire $naviresAttendu): self
+    {
+        if (!$this->naviresAttendus->contains($naviresAttendu)) {
+            $this->naviresAttendus[] = $naviresAttendu;
+            $naviresAttendu->setPortDestination($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNaviresAttendu(Navire $naviresAttendu): self
+    {
+        if ($this->naviresAttendus->removeElement($naviresAttendu)) {
+            // set the owning side to null (unless already changed)
+            if ($naviresAttendu->getPortDestination() === $this) {
+                $naviresAttendu->setPortDestination(null);
+            }
         }
 
         return $this;
