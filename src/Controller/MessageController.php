@@ -36,10 +36,9 @@ class MessageController extends AbstractController
             $message = $form->getData();
             
             $gestionContact->sendEmailWithAttachments($message);
-            
+            $this->addFlash('notification', "votre message a bien été envoyé");
         }
         
-        $this->addFlash('notification', "votre message a bien été envoyé");
         return $this->render('message/contact.html.twig',[
                     'form' => $form->createView(),
         ]);
