@@ -74,6 +74,29 @@ class Navire
      */
     private $portDestination;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Escale::class, mappedBy="leNavire", orphanRemoval=true)
+     */
+    private $lesEscales;
+
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\JoinColumn(nullable=false, name="longueur")
+     */
+    private $longueur;
+
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\JoinColumn(nullable=false, name="largeur")
+     */
+    private $largeur;
+
+    /**
+     * @ORM\Column(type="decimal", precision=10, scale=1)
+     * @ORM\JoinColumn(nullable=false, name="tiranteau")
+     */
+    private $tirantEau;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -171,6 +194,54 @@ class Navire
     public function setPortDestination(?Port $portDestination): self
     {
         $this->portDestination = $portDestination;
+
+        return $this;
+    }
+
+    public function getLesEscales(): ?string
+    {
+        return $this->lesEscales;
+    }
+
+    public function setLesEscales(string $lesEscales): self
+    {
+        $this->lesEscales = $lesEscales;
+
+        return $this;
+    }
+
+    public function getLongueur(): ?int
+    {
+        return $this->longueur;
+    }
+
+    public function setLongueur(int $longueur): self
+    {
+        $this->longueur = $longueur;
+
+        return $this;
+    }
+
+    public function getLargeur(): ?int
+    {
+        return $this->largeur;
+    }
+
+    public function setLargeur(int $largeur): self
+    {
+        $this->largeur = $largeur;
+
+        return $this;
+    }
+
+    public function getTirantEau(): ?string
+    {
+        return $this->tirantEau;
+    }
+
+    public function setTirantEau(string $tirantEau): self
+    {
+        $this->tirantEau = $tirantEau;
 
         return $this;
     }
