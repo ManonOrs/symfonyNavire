@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\AisShipTypeRepository;
 use App\Entity\AisShipType;
+use App\Repository\PortRepository;
 
 class AisShipTypeController extends AbstractController
 {
@@ -34,11 +35,14 @@ class AisShipTypeController extends AbstractController
     /**
      * @Route("/portcompatibles/{id}", name="ports")
      */
-    public function portsCompatibles(AisShipTypeRepository $repo,$id)
+    public function portsCompatibles(AisShipTypeRepository $repo,$id, PortRepository $repopo)
     {
-       $port=$repo->find($id);
-        return $this->render('aisshiptype/voirtous.html.twig', [
-                    'port' => $ports,
+       $type=$repo->find($id);
+       $ports=$type->getLesPorts();
+       $pay=$repopo->find();//arriver a trouver l'id de chaque pays avec les ports
+        return $this->render('aisshiptype/portscompatibles.html.twig', [
+                    'type' => $type,
+                    'ports' =>$ports,
         ]);
     }
     
