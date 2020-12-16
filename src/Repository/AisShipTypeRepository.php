@@ -47,4 +47,8 @@ class AisShipTypeRepository extends ServiceEntityRepository
         ;
     }
     */
+//    
+//    public function findPortsCompatibles($param) {
+//        
+//    }
 }

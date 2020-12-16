@@ -1,1 +1,23 @@
 {% extends "base.html.twig" %}
+{% block body %} 
+    <div class="length: 50%!important">    
+    <table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Type</th>
+      <th scope="col">Libelle</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for type in types %}
+    <tr class="table-primary">
+      <td>{{ type.id }}</td>
+      <td>{{ type.libelle }}</td>
+      <td>Ports compatibles</td>
+    </tr>
+    {% endfor %}
+      </tbody>
+</table>
+    </div>
+{% endblock %}
