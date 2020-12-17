@@ -33,13 +33,12 @@ class AisShipTypeController extends AbstractController
     }
     
     /**
-     * @Route("/portcompatibles/{id}", name="ports")
+     * @Route("/portscompatibles/{id}", name="ports")
      */
-    public function portsCompatibles(AisShipTypeRepository $repo,$id, PortRepository $repopo)
+    public function portsCompatibles(AisShipTypeRepository $repo,$id)
     {
        $type=$repo->find($id);
        $ports=$type->getLesPorts();
-       $pay=$repopo->find();//arriver a trouver l'id de chaque pays avec les ports
         return $this->render('aisshiptype/portscompatibles.html.twig', [
                     'type' => $type,
                     'ports' =>$ports,
